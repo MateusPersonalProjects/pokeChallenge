@@ -1,4 +1,38 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { TeamPokemon } from './entities/team-pokemon.entity';
+import { Team } from '../teams/entities/team.entity';
+import { AddPokemonDto } from './dto/add-pokemon.dto.ts';
+import { PokeapiService } from '../pokeapi/pokeapi.service.ts';
 
 @Injectable()
-export class TeamPokemonService {}
+export class TeamPokemonService {
+  constructor(
+    @InjectRepository(TeamPokemon) private repo: Repository<TeamPokemon>,
+    @InjectRepository(Team) private teamRepo: Repository<Team>,
+    private pokeapi: PokeapiService,
+  ) {}
+
+  async addPokemon(teamId: number, dto: AddPokemonDto) {
+    const team = await this.teamRepo.findOne({ where: { id: teamId }, relations: ['pokemons'] });
+    if (!team) throw new NotFoundException('Team not found');
+
+    if (team.pokemons.length >= 6)
+      throw new BadRequestException('Team already has 6 Pokémon');
+
+    // check if pokemon exist in the PokeApi
+    await this.pokeapi.getPokemon(dto.PokemonIdOuNome);
+
+    const tp = this.repo.create({ pokemonIdOuNome: dto.pokemonIdOuNome, team });
+    return this.repo.save(tp);
+  }
+  
+  list(teamId: number){
+    return this.repo.find({ where: { team: { id: teamId } } });
+  }
+
+  async remove(teamPokemonId: number) {
+    return this.repo.delete(teamPokemonId);
+  }
+}
