@@ -27,7 +27,29 @@ export class TeamPokemonService {
     const tp = this.repo.create({ pokemonIdOuNome: dto.pokemonIdOuNome, team });
     return this.repo.save(tp);
   }
-  
+
+/*
+  not working :/
+
+  async listWithDetails(teamId: number) {
+    const pokemons = await this.repo.find({ where: { teamId } });
+
+    // for each pokemon inside out database, search for them in the PokéAPI
+    const detailed = await Promise.all(
+      pokemons.map(async (p) => {
+        const info = await this.pokeApi.getPokemon(p.pokemonIdOuNome);
+        return{
+          id: p.id,
+          teamId: p.teamId,
+          identifier: p.pokemonIdOuNome,
+          details: info,
+        };
+      }),
+    );
+
+    return detailed;
+  }
+*/  
   list(teamId: number){
     return this.repo.find({ where: { team: { id: teamId } } });
   }

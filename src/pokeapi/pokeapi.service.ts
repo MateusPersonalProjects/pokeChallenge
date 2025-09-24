@@ -5,9 +5,9 @@ import axios from 'axios';
 export class PokeapiService {
   private readonly baseUrl = 'https://pokeapi.co/api/v2/pokemon';
 
-  async getPokemon(nameOrId: string){
+  async getPokemon(pokemonIdOrName: string | number){
     try{
-      const { data } = await axios.get(`${this.baseUrl}/${nameOrId}`);
+      const { data } = await axios.get(`${this.baseUrl}/${pokemonIdOrName}`);
       return{
         name: data.name,
         types: data.types.map((t) => t.type.name),
