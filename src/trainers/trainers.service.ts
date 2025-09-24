@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Trainer } from './entities/trainer.entity.ts';
-import { CreateTrainerDto } from './dto/create-trainer.dto.ts';
-import { UpdateTrainerDto } from './dto/update-trainer.dto.ts';
+import { Trainer } from './entities/trainer.entity';
+import { CreateTrainerDto } from './dto/create-trainer.dto';
+import { UpdateTrainerDto } from './dto/update-trainer.dto';
 
 @Injectable()
 export class TrainersService {

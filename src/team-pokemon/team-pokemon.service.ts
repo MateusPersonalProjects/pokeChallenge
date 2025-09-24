@@ -3,8 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TeamPokemon } from './entities/team-pokemon.entity';
 import { Team } from '../teams/entities/team.entity';
-import { AddPokemonDto } from './dto/add-pokemon.dto.ts';
-import { PokeapiService } from '../pokeapi/pokeapi.service.ts';
+import { AddPokemonDto } from './dto/add-pokemon.dto';
+import { PokeapiService } from '../pokeapi/pokeapi.service';
 
 @Injectable()
 export class TeamPokemonService {
@@ -22,7 +22,7 @@ export class TeamPokemonService {
       throw new BadRequestException('Team already has 6 Pokémon');
 
     // check if pokemon exist in the PokeApi
-    await this.pokeapi.getPokemon(dto.PokemonIdOuNome);
+    await this.pokeapi.getPokemon(dto.pokemonIdOuNome);
 
     const tp = this.repo.create({ pokemonIdOuNome: dto.pokemonIdOuNome, team });
     return this.repo.save(tp);

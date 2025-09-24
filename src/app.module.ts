@@ -1,10 +1,10 @@
 
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TrainersModule } from './trainers/trainers.module.ts';
-import { TeamsModule } from './teams/teams.module.ts';
-import { TeamPokemonModule } from './team-pokemon/team-pokemon.module.ts';
-import { PokeapiModule } from './pokeapi/pokeapi.module.ts';
+import { TrainersModule } from './trainers/trainers.module';
+import { TeamsModule } from './teams/teams.module';
+import { TeamPokemonModule } from './team-pokemon/team-pokemon.module';
+import { PokeapiModule } from './pokeapi/pokeapi.module';
 
 
 @Module({

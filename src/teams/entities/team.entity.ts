@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from 'typeorm';
-import { Trainer } from '../../trainers/entities/trainer.entity.ts';
-import { TeamPokemon } from '../../team-pokemon/entities/team-pokemon.entity.ts';
+import { Trainer } from '../../trainers/entities/trainer.entity';
+import { TeamPokemon } from '../../team-pokemon/entities/team-pokemon.entity';
 
 @Entity()
 export class Team {

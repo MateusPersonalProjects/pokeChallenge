@@ -1,11 +1,11 @@
-import { isNotEmpty, IsOptional, IsString} from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString} from 'class-validator';
 
 export class CreateTrainerDto {
-  @isNotEmpty()
+  @IsNotEmpty()
   @IsString()
   nome: string;
 
   @IsOptional()
   @IsString()
-  cidadeOrigem: String;
+  cidadeOrigem: string;
 }

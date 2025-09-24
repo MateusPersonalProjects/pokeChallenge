@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/common';
-import { TeamsService } from './teams.service.ts';
-import { CreateTeamDto } from './dto/create-team.dto.ts'
-import { UpdateTeamDto } from './dto/update-team.dto.ts'
+import { TeamsService } from './teams.service';
+import { CreateTeamDto } from './dto/create-team.dto'
+import { UpdateTeamDto } from './dto/update-team.dto'
 
 
 @Controller('teams')

@@ -1,5 +1,5 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateTrainerDto } from './create-trainer.dto.ts';
+import { CreateTrainerDto } from './create-trainer.dto';
 
-export class UpdateTrainerDtio extends PartialType(CreateTrainerDto) {}
+export class UpdateTrainerDto extends PartialType(CreateTrainerDto) {}
 

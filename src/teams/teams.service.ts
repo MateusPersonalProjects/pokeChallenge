@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Team } from './entities/team.entity.ts';
-import { Trainer } from '../trainers/entities/trainer.entity.ts';
-import { CreateTeamDto } from './dto/create-team.dto.ts';
-import { UpdateTeamDto } from './dto/update-team.dto.ts';
+import { Team } from './entities/team.entity';
+import { Trainer } from '../trainers/entities/trainer.entity';
+import { CreateTeamDto } from './dto/create-team.dto';
+import { UpdateTeamDto } from './dto/update-team.dto';
 
 @Injectable()
 export class TeamsService {

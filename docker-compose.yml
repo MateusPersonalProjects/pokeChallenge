@@ -5,7 +5,7 @@ services:
     container_name: pokechallenge_db
     restart: always
     environment:
-      POSTGRES_USER: netuser
+      POSTGRES_USER: nestuser
       POSTGRES_PASSWORD: nestpass
       POSTGRES_DB: pokechallenge
     ports:
