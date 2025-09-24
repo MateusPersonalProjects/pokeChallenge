@@ -28,31 +28,37 @@ export class TeamPokemonService {
     return this.repo.save(tp);
   }
 
-/*
-  not working :/
+  async list(teamId: number) {
+    const team = await this.teamRepo.findOne({
+      where: { id: teamId },
+      relations: ['pokemons'],
+    });
 
-  async listWithDetails(teamId: number) {
-    const pokemons = await this.repo.find({ where: { teamId } });
+    if (!team) {
+      throw new NotFoundException('Team not found');
+    }
 
-    // for each pokemon inside out database, search for them in the PokéAPI
-    const detailed = await Promise.all(
-      pokemons.map(async (p) => {
-        const info = await this.pokeApi.getPokemon(p.pokemonIdOuNome);
-        return{
-          id: p.id,
-          teamId: p.teamId,
-          identifier: p.pokemonIdOuNome,
-          details: info,
+    // For each pokemon in the team, seek information on the PokéAPI
+    const detailedPokemons = await Promise.all(
+      team.pokemons.map(async (pokemon) => {
+        const details = await this.pokeapi.getPokemon(pokemon.pokemonIdOuNome);
+        return {
+          id: pokemon.id,
+          teamId: team.id,
+          identifier: pokemon.pokemonIdOuNome,
+          details,
         };
       }),
     );
 
-    return detailed;
+    return detailedPokemons;
   }
-*/  
+
+  /*
   list(teamId: number){
     return this.repo.find({ where: { team: { id: teamId } } });
   }
+  */
 
   async remove(teamPokemonId: number) {
     return this.repo.delete(teamPokemonId);
